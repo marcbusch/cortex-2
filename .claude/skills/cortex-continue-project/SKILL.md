@@ -130,6 +130,8 @@ Wait for user acknowledgment before proceeding.
 
 ### Step 5: Gather
 
+**IMPORTANT:** Launch all agents using the `Task` tool in **parallel foreground mode** — make multiple Task calls in a single message. Do NOT use `run_in_background: true` — the results must be returned directly so you can consolidate them in Step 6.
+
 #### Web Research
 
 For each web research question, spawn a `web-research-agent` using the `Task` tool:
@@ -187,7 +189,7 @@ Agent: web-research | Date: <today>
 <Observations, caveats, suggestions for follow-up.>
 ```
 
-**Launch web research agents in parallel** (up to 3 concurrent agents for different questions).
+**Launch web research agents in parallel** by making multiple Task tool calls in a single message (up to 3 concurrent). Do NOT use `run_in_background`.
 
 #### Code Exploration
 
@@ -254,7 +256,7 @@ Agent: code-exploration | Date: <today>
 <Observations, caveats, suggestions for follow-up.>
 ```
 
-**Launch code exploration agents in parallel** with web research agents when investigating different questions.
+**Launch code exploration agents in parallel** with web research agents by including them in the same multi-Task message. Do NOT use `run_in_background`.
 
 #### Data Exploration
 
@@ -321,7 +323,7 @@ Agent: data-exploration | Date: <today>
 <Observations, caveats, suggestions for follow-up.>
 ```
 
-**Launch data exploration agents in parallel** with other agents when investigating different questions. Note: data exploration may be slower due to query execution — the orchestrator should proceed with other findings while waiting if needed.
+**Launch data exploration agents in parallel** with other agents by including them in the same multi-Task message. Do NOT use `run_in_background`.
 
 #### User Interview
 
