@@ -18,16 +18,18 @@ Conduct the interview in rounds. Use `AskUserQuestion` for structured choices an
 
 ### Round 1: Project Identity
 
-Ask the user (as a single conversational message — NOT using AskUserQuestion for this):
+Use `AskUserQuestion` with three questions in a single call:
 
-> **Let's set up your new Cortex project.**
->
-> Tell me:
-> 1. **Project name** — a short slug (e.g., "japanese-cooking", "dbt-warehouse", "germany-to-japan"). This becomes the directory name.
-> 2. **Display title** — the human-friendly name (e.g., "Japanese Home Cooking", "Analytics Warehouse").
-> 3. **What's this about?** — the domain or topic, and *why* you want to build this knowledge.
+1. **"What's the project name?"** (header: "Name")
+   - This becomes the directory name. Options: provide 2-3 example slugs as inspiration (e.g., "japanese-cooking", "dbt-warehouse", "germany-to-japan") — the user will type their own via "Other".
 
-Wait for the user's response before continuing.
+2. **"What's the display title?"** (header: "Title")
+   - The human-friendly name. Options: provide 2-3 examples matching the slug examples (e.g., "Japanese Home Cooking", "Analytics Warehouse") — the user will type their own via "Other".
+
+3. **"What's this about and why?"** (header: "Domain")
+   - The domain/topic and motivation. Options: provide 2-3 example descriptions (e.g., "Learning Japanese home cooking techniques for everyday meals", "Understanding our analytics warehouse to improve data quality") — the user will type their own via "Other".
+
+Wait for the user's responses before continuing.
 
 ### Round 2: Areas and Scope
 
