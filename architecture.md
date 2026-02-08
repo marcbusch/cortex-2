@@ -380,7 +380,7 @@ Custom agents are defined in `.claude/agents/` with tool restrictions and system
 |-------|-----------|---------|-------|
 | `atlas-web-research-agent` | `.claude/agents/atlas-web-research-agent.md` | Search and synthesize web sources with citations | WebSearch, WebFetch, Read |
 | `atlas-data-explorer-agent` | `.claude/agents/atlas-data-explorer-agent.md` | Query and analyze data via BigQuery MCP | BigQuery MCP tools, Read |
-| `Explore` (built-in) | Claude Code built-in | Extract domain knowledge from codebases | Glob, Grep, Read |
+| `atlas-code-explorer-agent` | `.claude/agents/atlas-code-explorer-agent.md` | Extract domain knowledge from codebases | Glob, Grep, Read |
 
 ### Agent Output Format
 

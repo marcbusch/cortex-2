@@ -109,33 +109,14 @@ Handle modifications if requested.
 
 ## Step 8: Persist
 
-If approved:
+If approved, follow the persistence procedure in [../atlas-continue-project/persistence.md](../atlas-continue-project/persistence.md) (Steps A through C).
 
-### 8a. Backup
+**Interview-specific notes:**
+- Use `[high confidence · s:user]` or `[medium confidence · s:user]` for all interview-sourced knowledge
+- Integrate findings as prose — rewrite sections freely for narrative flow
+- Session log entry format: `| <today> | User interview on <focus topic>. <N> findings captured. |`
 
-1. Get current date/time as `YYYY-MM-DD_HHMM`
-2. Create `.local/atlas/<project-name>/_backups/<timestamp>/`
-3. For each file being modified: read current content, write copy to backup directory
-
-### 8b. Write Updates
-
-For each area file:
-1. Read current content
-2. Integrate interview findings as prose — rewrite sections freely for narrative flow
-3. Use `[high confidence · s:user]` or `[medium confidence · s:user]` for all interview-sourced knowledge
-4. Remove answered open questions from `## Open Questions`
-5. Add new open questions that emerged during the interview
-6. Update `> Last updated:` date and status
-7. Write the updated file
-
-### 8c. Update project.md
-
-1. Read current project.md
-2. Add session log entry: `| <today> | User interview on <focus topic>. <N> findings captured. |`
-3. Update area statuses if warranted
-4. Refresh `## Open Questions (Top Priority)`
-5. Update `## Next Session Focus` based on what was learned
-6. Write updated project.md
+**Not applicable to interviews:** Cross-reference maintenance (Step D), split/merge checks, and domain extension proposals do not run during interview sessions.
 
 ## Step 9: Wrap Up
 

@@ -13,9 +13,13 @@ architecture.md                          # Full system design specification
 .claude/agents/
   atlas-web-research-agent.md           # Custom agent: web research with source citations
   atlas-data-explorer-agent.md          # Custom agent: BigQuery data exploration
+  atlas-code-explorer-agent.md          # Custom agent: codebase domain knowledge extraction
 .claude/skills/
   atlas-new-project/SKILL.md            # /atlas-new-project — project initialization via interview
   atlas-continue-project/SKILL.md       # /atlas-continue-project — orchestrated investigation sessions
+  atlas-continue-project/persistence.md # Reference: backup, write, cross-reference procedures
+  atlas-continue-project/split-merge.md # Reference: file split/merge detection and execution
+  atlas-continue-project/domain-extensions.md  # Reference: conventions, glossary, timeline proposals
   atlas-interview/SKILL.md              # /atlas-interview — structured user interviews
   atlas-questions/SKILL.md              # /atlas-questions — generate expert questions from knowledge gaps
   atlas-install/SKILL.md                # /atlas-install — copy skills to ~/.claude/skills/ for global use
@@ -41,7 +45,7 @@ The orchestrator (`/atlas-continue-project`) selects methods based on domain sig
 | Method | Agent Type | Domain Signal |
 |--------|-----------|---------------|
 | Web Research | `atlas-web-research-agent` | All projects |
-| Code Exploration | `Explore` agent | Code-linked projects (dbt, LookML, etc.) |
+| Code Exploration | `atlas-code-explorer-agent` | Code-linked projects (dbt, LookML, etc.) |
 | Data Exploration | `atlas-data-explorer-agent` | Data warehouse projects (BigQuery) |
 | User Interview | Direct (`AskUserQuestion`) | Personal/planning projects |
 
@@ -72,6 +76,7 @@ All file writes follow: backup first → show user exactly what changes → user
 
 When editing skill files, follow these constraints:
 - Skills must use `AskUserQuestion` for structured choices and never write without user confirmation
-- Agent prompts include the exact output format template — keep these consistent with `architecture.md`
+- Agent output format templates live in the agent definition files (`.claude/agents/`), not inline in skills — keep these consistent with `architecture.md`
+- The continue-project skill uses progressive disclosure: core orchestration in SKILL.md, post-persist procedures in reference files (persistence.md, split-merge.md, domain-extensions.md)
 - Cross-reference maintenance (link checking/updating) runs after every persist step
 - Domain extension proposals (conventions.md, glossary.md, timeline) are offered once per trigger, tracked in session log to avoid re-proposing
