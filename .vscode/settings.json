@@ -1,0 +1,8 @@
+{
+  "markdown.validate.fileLinks.enabled": "ignore",
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#ffd000",
+    "titleBar.activeForeground": "#030000",
+    "titleBar.inactiveBackground": "#cfac11"
+  }
+}
