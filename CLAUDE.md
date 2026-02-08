@@ -2,21 +2,21 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## What Is Cortex 2?
+## What Is Atlas?
 
-Cortex is a domain expertise acquisition system for Claude Code. It has no application code — it is entirely a set of Claude Code skills (`.claude/skills/`) backed by an architecture specification (`architecture.md`). Knowledge projects are stored as markdown file trees under `.local/cortex/<project-name>/`.
+Atlas is a domain expertise acquisition system for Claude Code. It has no application code — it is entirely a set of Claude Code skills (`.claude/skills/`) backed by an architecture specification (`architecture.md`). Knowledge projects are stored as markdown file trees under `.local/atlas/<project-name>/`.
 
 ## Repository Structure
 
 ```
 architecture.md                          # Full system design specification
 .claude/skills/
-  cortex-new-project/SKILL.md            # /cortex-new-project — project initialization via interview
-  cortex-continue-project/SKILL.md       # /cortex-continue-project — orchestrated investigation sessions
-  cortex-interview/SKILL.md              # /cortex-interview — structured user interviews
-  cortex-questions/SKILL.md              # /cortex-questions — generate expert questions from knowledge gaps
-  cortex-install/SKILL.md                # /cortex-install — copy skills to ~/.claude/skills/ for global use
-.local/cortex/                           # Knowledge projects (gitignored)
+  atlas-new-project/SKILL.md            # /atlas-new-project — project initialization via interview
+  atlas-continue-project/SKILL.md       # /atlas-continue-project — orchestrated investigation sessions
+  atlas-interview/SKILL.md              # /atlas-interview — structured user interviews
+  atlas-questions/SKILL.md              # /atlas-questions — generate expert questions from knowledge gaps
+  atlas-install/SKILL.md                # /atlas-install — copy skills to ~/.claude/skills/ for global use
+.local/atlas/                           # Knowledge projects (gitignored)
 ```
 
 ## Architecture Overview
@@ -26,14 +26,14 @@ The system operates through **skills** (slash commands) that orchestrate **gathe
 ### Skills as the Interface
 
 Users interact exclusively through slash commands. The core loop is:
-1. `/cortex-new-project` — interview user, scaffold `project.md` + area files
-2. `/cortex-continue-project` — the main orchestration loop: load state → select methods → gather (parallel agents) → consolidate → user confirms → persist with backup
-3. `/cortex-interview` — direct structured interview for tribal knowledge
-4. `/cortex-questions` — generate targeted questions for external experts
+1. `/atlas-new-project` — interview user, scaffold `project.md` + area files
+2. `/atlas-continue-project` — the main orchestration loop: load state → select methods → gather (parallel agents) → consolidate → user confirms → persist with backup
+3. `/atlas-interview` — direct structured interview for tribal knowledge
+4. `/atlas-questions` — generate targeted questions for external experts
 
 ### Gathering Methods
 
-The orchestrator (`/cortex-continue-project`) selects methods based on domain signals detected in `project.md`:
+The orchestrator (`/atlas-continue-project`) selects methods based on domain signals detected in `project.md`:
 
 | Method | Agent Type | Domain Signal |
 |--------|-----------|---------------|

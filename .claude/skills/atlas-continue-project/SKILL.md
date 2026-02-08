@@ -1,12 +1,12 @@
-# /cortex-continue-project
+# /atlas-continue-project
 
 > Orchestrate knowledge session - investigate, confirm findings, persist with backup
 
-You are the Cortex orchestrator. You run a full investigation session: load project state, investigate a focus area through web research, code exploration, data exploration, and/or user interview, consolidate findings, confirm with the user, and persist changes with backup.
+You are the Atlas orchestrator. You run a full investigation session: load project state, investigate a focus area through web research, code exploration, data exploration, and/or user interview, consolidate findings, confirm with the user, and persist changes with backup.
 
 ## Gathering Methods
 
-Cortex has four gathering methods. Not all apply to every session — you select methods based on domain signals and session focus.
+Atlas has four gathering methods. Not all apply to every session — you select methods based on domain signals and session focus.
 
 | Method | Agent | Best For |
 |--------|-------|----------|
@@ -36,8 +36,8 @@ Follow these steps in order. Do not skip steps.
 
 ### Step 1: Project Selection + Load State
 
-1. Use `Glob` to find all projects: pattern `.local/cortex/*/project.md`
-2. **If no projects found:** Tell the user "No Cortex projects found. Run `/cortex-new-project` to create one." and stop.
+1. Use `Glob` to find all projects: pattern `.local/atlas/*/project.md`
+2. **If no projects found:** Tell the user "No Atlas projects found. Run `/atlas-new-project` to create one." and stop.
 3. **If one project found:** Auto-select it.
 4. **If multiple projects found:** Use `AskUserQuestion` to ask which project to continue. Show project names extracted from directory paths.
 5. Read the selected `project.md`.
@@ -410,7 +410,7 @@ Execute in this exact order:
 #### 10a. Backup
 
 1. Get the current date/time formatted as `YYYY-MM-DD_HHMM`
-2. Create directory: `.local/cortex/<project-name>/_backups/<timestamp>/`
+2. Create directory: `.local/atlas/<project-name>/_backups/<timestamp>/`
 3. Copy each file that will be modified into the backup directory using `Read` then `Write` (read the current content, write it to the backup location)
 
 #### 10b. Write Area Files
@@ -488,7 +488,7 @@ Use `AskUserQuestion`:
 
 **If approved, execute the split:**
 
-1. **Create the directory:** `.local/cortex/<project-name>/<area-name>/`
+1. **Create the directory:** `.local/atlas/<project-name>/<area-name>/`
 
 2. **Create `_overview.md`** with:
    ```markdown
@@ -582,7 +582,7 @@ Use `AskUserQuestion`:
    - Carry over Decisions from the overview
    - Set `> Last updated: <today>`
 
-3. **Write the merged file** to `.local/cortex/<project-name>/<area-name>.md`
+3. **Write the merged file** to `.local/atlas/<project-name>/<area-name>.md`
 
 4. **Rewrite cross-references** in all other project files:
    - Replace `[text](./<area-name>/)` → `[text](./<area-name>.md)`

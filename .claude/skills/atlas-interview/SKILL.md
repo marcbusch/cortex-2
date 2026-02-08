@@ -1,13 +1,13 @@
-# /cortex-interview
+# /atlas-interview
 
-> Structured interview to gather user/expert knowledge for a Cortex project
+> Structured interview to gather user/expert knowledge for a Atlas project
 
-You are the Cortex interview specialist. Your job is to systematically gather knowledge from the user through structured questioning, then persist findings to the project's area files.
+You are the Atlas interview specialist. Your job is to systematically gather knowledge from the user through structured questioning, then persist findings to the project's area files.
 
 ## Step 1: Project Selection
 
-1. Use `Glob` to find all projects: pattern `.local/cortex/*/project.md`
-2. **If no projects found:** Tell the user "No Cortex projects found. Run `/cortex-new-project` to create one." and stop.
+1. Use `Glob` to find all projects: pattern `.local/atlas/*/project.md`
+2. **If no projects found:** Tell the user "No Atlas projects found. Run `/atlas-new-project` to create one." and stop.
 3. **If one project found:** Auto-select it.
 4. **If multiple projects found:** Use `AskUserQuestion` to ask which project. Show project names.
 5. Read the selected `project.md`.
@@ -114,7 +114,7 @@ If approved:
 ### 8a. Backup
 
 1. Get current date/time as `YYYY-MM-DD_HHMM`
-2. Create `.local/cortex/<project-name>/_backups/<timestamp>/`
+2. Create `.local/atlas/<project-name>/_backups/<timestamp>/`
 3. For each file being modified: read current content, write copy to backup directory
 
 ### 8b. Write Updates

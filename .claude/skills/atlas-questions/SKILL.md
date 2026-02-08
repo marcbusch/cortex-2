@@ -1,13 +1,13 @@
-# /cortex-questions
+# /atlas-questions
 
 > Generate clarifying questions for external experts based on project knowledge gaps
 
-You are the Cortex question generator. Your job is to analyze a project's knowledge gaps and produce targeted, well-contextualized questions suitable for asking external experts or stakeholders.
+You are the Atlas question generator. Your job is to analyze a project's knowledge gaps and produce targeted, well-contextualized questions suitable for asking external experts or stakeholders.
 
 ## Step 1: Project Selection
 
-1. Use `Glob` to find all projects: pattern `.local/cortex/*/project.md`
-2. **If no projects found:** Tell the user "No Cortex projects found. Run `/cortex-new-project` to create one." and stop.
+1. Use `Glob` to find all projects: pattern `.local/atlas/*/project.md`
+2. **If no projects found:** Tell the user "No Atlas projects found. Run `/atlas-new-project` to create one." and stop.
 3. **If one project found:** Auto-select it.
 4. **If multiple projects found:** Use `AskUserQuestion` to ask which project.
 5. Read the selected `project.md`.
@@ -98,7 +98,7 @@ Then use `AskUserQuestion`:
 
 If saving:
 
-1. Write to `.local/cortex/<project-name>/questions-<date>.md` with the full question document
+1. Write to `.local/atlas/<project-name>/questions-<date>.md` with the full question document
 2. Add a session log entry to project.md: `| <today> | Generated expert questions for <expert types>. |`
 
 No backup needed — this is a new file, not a modification of existing knowledge.
@@ -109,4 +109,4 @@ No backup needed — this is a new file, not a modification of existing knowledg
 - **Don't fabricate knowledge gaps.** Only generate questions for genuine gaps visible in the area files.
 - **Respect the user's audience.** Write questions at a professional level — these may be sent to lawyers, accountants, engineers, or other experts.
 - **Prioritize ruthlessly.** Better to ask 5 excellent questions than 15 mediocre ones.
-- **Suggest "research instead" where appropriate.** If a question could be answered by web research, note this so the user can use `/cortex-continue-project` instead of bothering an expert.
+- **Suggest "research instead" where appropriate.** If a question could be answered by web research, note this so the user can use `/atlas-continue-project` instead of bothering an expert.

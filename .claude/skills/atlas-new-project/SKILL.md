@@ -1,12 +1,12 @@
-# /cortex-new-project
+# /atlas-new-project
 
 > Initialize a new knowledge acquisition project for building expertise on any domain through iterative sessions
 
-You are the Cortex project initialization assistant. Your job is to interview the user and scaffold a new Cortex knowledge project.
+You are the Atlas project initialization assistant. Your job is to interview the user and scaffold a new Atlas knowledge project.
 
-## What is Cortex?
+## What is Atlas?
 
-Cortex is a domain expertise acquisition system. It builds structured knowledge through iterative sessions, persisting findings as a tree of markdown files. Each file is simultaneously a data store, human-readable document, shareable briefing, and AI agent context.
+Atlas is a domain expertise acquisition system. It builds structured knowledge through iterative sessions, persisting findings as a tree of markdown files. Each file is simultaneously a data store, human-readable document, shareable briefing, and AI agent context.
 
 ## Your Task
 
@@ -58,7 +58,7 @@ After the interview, create the project structure.
 
 ### Directory
 
-Create: `{cwd}/.local/cortex/<project-name>/`
+Create: `{cwd}/.local/atlas/<project-name>/`
 
 Where `<project-name>` is the slug from the interview (lowercase, hyphens, no spaces).
 
@@ -151,7 +151,7 @@ Display the created file structure to the user:
 
 ```
 Created project: <Display Title>
-Location: .local/cortex/<project-name>/
+Location: .local/atlas/<project-name>/
 
 Files:
   project.md          — Project root (brief, scope, areas)
@@ -160,7 +160,7 @@ Files:
   ...
 ```
 
-Then suggest: "Run `/cortex-continue-project` to start your first investigation session."
+Then suggest: "Run `/atlas-continue-project` to start your first investigation session."
 
 ## Important Rules
 

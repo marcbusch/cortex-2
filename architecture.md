@@ -1,24 +1,24 @@
-# Cortex 2 — Architecture Specification
+# Atlas — Architecture Specification
 
 > v1.0 — 2026-02-07
 
 ## Overview
 
-Cortex is a domain expertise acquisition system for Claude Code. It builds structured knowledge through iterative sessions, persisting findings as a tree of markdown files that serve simultaneously as human-readable documents, shareable briefings, and AI agent context.
+Atlas is a domain expertise acquisition system for Claude Code. It builds structured knowledge through iterative sessions, persisting findings as a tree of markdown files that serve simultaneously as human-readable documents, shareable briefings, and AI agent context.
 
 ### Core Principles
 
 1. **The file format is the product.** Every markdown file is simultaneously the data store, the human-readable output, a shareable document, and valid AI agent context. No transformation step, no export.
 2. **Write for understanding, not for parsing.** Capture intent and business rules, not code structure. "Orders are enriched with customer attributes for segmentation" survives a refactor; "line 47 joins on customer_id" does not.
 3. **Iterative refinement.** Knowledge builds over multiple sessions. The system remembers what it knows, what it doesn't, and what to investigate next.
-4. **Sparse human interaction.** The user steers direction; Cortex does the heavy lifting autonomously.
+4. **Sparse human interaction.** The user steers direction; Atlas does the heavy lifting autonomously.
 5. **Safe persistence.** Backups before any modification. User confirms before changes are written.
 
 ---
 
 ## Information Gathering Methods
 
-Cortex gathers knowledge through five methods. Not all apply to every project — the orchestrator selects methods based on domain and session focus.
+Atlas gathers knowledge through five methods. Not all apply to every project — the orchestrator selects methods based on domain and session focus.
 
 | Method | Autonomous | Tools | Best For |
 |--------|-----------|-------|----------|
@@ -40,12 +40,12 @@ Cortex gathers knowledge through five methods. Not all apply to every project �
 
 ## Project File Structure
 
-Each Cortex project is a tree of markdown files stored in `.local/cortex/<project-name>/`.
+Each Atlas project is a tree of markdown files stored in `.local/atlas/<project-name>/`.
 
 ### Minimal Structure (New Project)
 
 ```
-.local/cortex/<project-name>/
+.local/atlas/<project-name>/
   project.md          # Root: brief, scope, area index, session log
   <area-1>.md         # Knowledge area file
   <area-2>.md         # Knowledge area file
@@ -56,7 +56,7 @@ Each Cortex project is a tree of markdown files stored in `.local/cortex/<projec
 ### Grown Structure (After Multiple Sessions)
 
 ```
-.local/cortex/<project-name>/
+.local/atlas/<project-name>/
   project.md
   visa-and-residence.md
   healthcare-transition.md
@@ -269,10 +269,10 @@ Use relative timelines (T-minus from key event) rather than absolute dates — p
 
 ## Orchestration Flow
 
-The `/cortex-continue-project` skill orchestrates investigation sessions.
+The `/atlas-continue-project` skill orchestrates investigation sessions.
 
 ```
-USER: /cortex-continue-project
+USER: /atlas-continue-project
 
   1. LOAD STATE
      Read project.md + area files relevant to planned focus.
@@ -337,12 +337,12 @@ USER: /cortex-continue-project
 
 | Skill | Purpose | Invoked By |
 |-------|---------|------------|
-| `/cortex-new-project` | Initialize project via interview | User |
-| `/cortex-continue-project` | Full investigation session: load → investigate → confirm → persist | User |
-| `/cortex-interview` | Structured interview to gather user knowledge | User or orchestrator |
-| `/cortex-questions` | Generate questions for external experts/stakeholders | User |
+| `/atlas-new-project` | Initialize project via interview | User |
+| `/atlas-continue-project` | Full investigation session: load → investigate → confirm → persist | User |
+| `/atlas-interview` | Structured interview to gather user knowledge | User or orchestrator |
+| `/atlas-questions` | Generate questions for external experts/stakeholders | User |
 
-### `/cortex-new-project`
+### `/atlas-new-project`
 
 Interviews the user to establish:
 1. Domain/topic and motivation
@@ -354,19 +354,19 @@ Interviews the user to establish:
 
 Creates the project directory with `project.md` and initial area files (mostly empty, with open questions seeded from the interview).
 
-### `/cortex-continue-project`
+### `/atlas-continue-project`
 
 The core orchestration loop (see Orchestration Flow above). Handles the full cycle from loading state through investigation to persisted updates.
 
-### `/cortex-interview`
+### `/atlas-interview`
 
 Structured gathering of knowledge from the user. Two modes:
 1. **Direct interview** — systematic questions using AskUserQuestion, focused on specific areas or open questions
-2. **Expert prep** — redirects to `/cortex-questions` for generating questions to send to others
+2. **Expert prep** — redirects to `/atlas-questions` for generating questions to send to others
 
 Output: proposed text additions to area files, presented for confirmation.
 
-### `/cortex-questions`
+### `/atlas-questions`
 
 Generates targeted questions for external experts based on open questions and knowledge gaps. Output is a markdown document suitable for copy/paste — organized by topic, with context for each question.
 
@@ -450,7 +450,7 @@ The markdown files are directly usable in multiple contexts without transformati
 
 5. **RAG source material.** Each area file is a well-scoped chunk — natural chunking for retrieval-augmented generation.
 
-6. **Living documentation.** For technical domains, the Cortex output evolves as the system evolves — updated through investigation sessions rather than manual writing.
+6. **Living documentation.** For technical domains, the Atlas output evolves as the system evolves — updated through investigation sessions rather than manual writing.
 
 ---
 
@@ -472,16 +472,16 @@ The markdown files are directly usable in multiple contexts without transformati
 ## Implementation Roadmap
 
 ### Phase 1: Foundation
-- [x] `/cortex-new-project` skill — interview and project scaffolding
-- [x] `/cortex-continue-project` skill — orchestration loop with web research
+- [x] `/atlas-new-project` skill — interview and project scaffolding
+- [x] `/atlas-continue-project` skill — orchestration loop with web research
 - [x] Backup-before-write mechanism
 - [x] Area file template and inline conventions
 
 ### Phase 2: Full Gathering
 - [x] Code Explorer Agent
 - [x] Data Explorer Agent
-- [x] `/cortex-interview` skill
-- [x] `/cortex-questions` skill
+- [x] `/atlas-interview` skill
+- [x] `/atlas-questions` skill
 
 ### Phase 3: File Management
 - [x] Automatic split detection and proposal
@@ -495,4 +495,4 @@ The markdown files are directly usable in multiple contexts without transformati
 
 ---
 
-*This specification is the design foundation for Cortex 2. Update as implementation reveals new insights.*
+*This specification is the design foundation for Atlas. Update as implementation reveals new insights.*
