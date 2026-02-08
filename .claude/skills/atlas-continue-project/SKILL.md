@@ -10,9 +10,9 @@ Atlas has four gathering methods. Not all apply to every session — you select 
 
 | Method | Agent | Best For |
 |--------|-------|----------|
-| **Web Research** | `web-research-agent` | Public knowledge, regulations, best practices, API docs, community patterns |
+| **Web Research** | `atlas-web-research-agent` | Public knowledge, regulations, best practices, API docs, community patterns |
 | **Code Exploration** | `Explore` agent | Business logic in code, conventions, patterns, schema understanding |
-| **Data Exploration** | `data-explorer-agent` | Understanding data, validating business rules, schema discovery via BigQuery |
+| **Data Exploration** | `atlas-data-explorer-agent` | Understanding data, validating business rules, schema discovery via BigQuery |
 | **User Interview** | Direct (AskUserQuestion) | Tribal knowledge, preferences, constraints, decisions, personal context |
 
 ### Domain Signal Detection
@@ -134,11 +134,11 @@ Wait for user acknowledgment before proceeding.
 
 #### Web Research
 
-For each web research question, spawn a `web-research-agent` using the `Task` tool:
+For each web research question, spawn a `atlas-web-research-agent` using the `Task` tool:
 
 ```
 Task tool parameters:
-  subagent_type: "web-research-agent"
+  subagent_type: "atlas-web-research-agent"
   description: "<3-5 word summary>"
   prompt: <see template below>
 ```
@@ -146,47 +146,11 @@ Task tool parameters:
 **Web research agent prompt template:**
 
 ```
-You are researching for a knowledge acquisition project.
-
 ## Research Question
 <the specific question>
 
 ## Context — What Is Already Known
 <paste the relevant section from the area file so the agent doesn't re-research known things>
-
-## Instructions
-- Search for authoritative, current information on this question
-- Prioritize official sources, established references, and expert analysis
-- Note conflicting information from different sources
-- Assess confidence in each finding (high/medium/low)
-- Flag anything that seems uncertain or needs verification
-
-## Output Format
-Return your findings in this exact format:
-
-## Findings: <topic>
-
-Agent: web-research | Date: <today>
-
-### <Sub-topic>
-
-<Finding as prose paragraph.> [high confidence · s:<source-name>]
-
-<Another finding.> [medium confidence · s:<source-name>]
-
-> **Hypothesis:** <Unverified claim.> [low confidence]
-
-### New Questions Raised
-
-- **<Question text>** (<priority>) — <context>
-
-### Sources Used
-
-- **[s:<source-id>]** url — <title>. <URL>. Reliability: <high/medium/low>. Accessed: <today>.
-
-### Notes
-
-<Observations, caveats, suggestions for follow-up.>
 ```
 
 **Launch web research agents in parallel** by making multiple Task tool calls in a single message (up to 3 concurrent). Do NOT use `run_in_background`.
@@ -260,11 +224,11 @@ Agent: code-exploration | Date: <today>
 
 #### Data Exploration
 
-For questions about data shape, content, quality, or business rules encoded in data, spawn a `data-explorer-agent` using the `Task` tool:
+For questions about data shape, content, quality, or business rules encoded in data, spawn a `atlas-data-explorer-agent` using the `Task` tool:
 
 ```
 Task tool parameters:
-  subagent_type: "data-explorer-agent"
+  subagent_type: "atlas-data-explorer-agent"
   description: "<3-5 word summary>"
   prompt: <see template below>
 ```
@@ -272,8 +236,6 @@ Task tool parameters:
 **Data exploration agent prompt template:**
 
 ```
-You are exploring data in BigQuery to extract domain knowledge for a knowledge acquisition project.
-
 ## Research Question
 <the specific question — e.g., "What tables contain customer data and what's the grain?" or "What does the order status lifecycle look like?">
 
@@ -282,45 +244,6 @@ You are exploring data in BigQuery to extract domain knowledge for a knowledge a
 
 ## Data Hints
 <any known dataset names, table patterns, or schema info — e.g., "BigQuery project: analytics-prod, dataset: marts">
-
-## Instructions
-- Query to understand schema, relationships, and data patterns
-- Focus on BUSINESS MEANING: what do the tables represent, what are the key entities, what are the relationships
-- Check cardinality, null rates, and value distributions for key columns
-- Look for business rules encoded in the data (status values, categorizations, thresholds)
-- Note data quality issues or surprises
-- Keep queries efficient — use LIMIT, sample where appropriate
-
-## Output Format
-Return your findings in this exact format:
-
-## Findings: <topic>
-
-Agent: data-exploration | Date: <today>
-
-### <Sub-topic>
-
-<Finding as prose paragraph about business meaning.> [high confidence · s:data:<dataset.table>]
-
-<Another finding about data patterns.> [medium confidence · s:data:<dataset.table>]
-
-> **Hypothesis:** <Inferred business rule from data patterns.> [low confidence]
-
-### Schema Notes
-
-- `<dataset.table>` — <grain, row count, key columns, what it represents>
-
-### Data Quality Observations
-
-- <observation about nulls, duplicates, unexpected values>
-
-### New Questions Raised
-
-- **<Question text>** (<priority>) — <context>
-
-### Notes
-
-<Observations, caveats, suggestions for follow-up.>
 ```
 
 **Launch data exploration agents in parallel** with other agents by including them in the same multi-Task message. Do NOT use `run_in_background`.

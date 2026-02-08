@@ -10,6 +10,9 @@ Atlas is a domain expertise acquisition system for Claude Code. It has no applic
 
 ```
 architecture.md                          # Full system design specification
+.claude/agents/
+  atlas-web-research-agent.md           # Custom agent: web research with source citations
+  atlas-data-explorer-agent.md          # Custom agent: BigQuery data exploration
 .claude/skills/
   atlas-new-project/SKILL.md            # /atlas-new-project — project initialization via interview
   atlas-continue-project/SKILL.md       # /atlas-continue-project — orchestrated investigation sessions
@@ -37,9 +40,9 @@ The orchestrator (`/atlas-continue-project`) selects methods based on domain sig
 
 | Method | Agent Type | Domain Signal |
 |--------|-----------|---------------|
-| Web Research | `web-research-agent` | All projects |
+| Web Research | `atlas-web-research-agent` | All projects |
 | Code Exploration | `Explore` agent | Code-linked projects (dbt, LookML, etc.) |
-| Data Exploration | `data-explorer-agent` | Data warehouse projects (BigQuery) |
+| Data Exploration | `atlas-data-explorer-agent` | Data warehouse projects (BigQuery) |
 | User Interview | Direct (`AskUserQuestion`) | Personal/planning projects |
 
 Agents are launched in **parallel foreground mode** (multiple `Task` calls in a single message, never `run_in_background`).

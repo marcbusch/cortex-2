@@ -374,11 +374,13 @@ Generates targeted questions for external experts based on open questions and kn
 
 ## Agents
 
-| Agent | Purpose | Spawned By | Tools |
-|-------|---------|------------|-------|
-| Web Research Agent | Search and synthesize web sources with citations | Orchestrator | WebSearch, WebFetch, Read |
-| Code Explorer Agent | Extract domain knowledge from codebases | Orchestrator | Glob, Grep, Read |
-| Data Explorer Agent | Query and analyze data via BigQuery MCP | Orchestrator | BigQuery MCP tools, Read |
+Custom agents are defined in `.claude/agents/` with tool restrictions and system instructions. The orchestrator spawns them via the `Task` tool using their `subagent_type` name.
+
+| Agent | Definition | Purpose | Tools |
+|-------|-----------|---------|-------|
+| `atlas-web-research-agent` | `.claude/agents/atlas-web-research-agent.md` | Search and synthesize web sources with citations | WebSearch, WebFetch, Read |
+| `atlas-data-explorer-agent` | `.claude/agents/atlas-data-explorer-agent.md` | Query and analyze data via BigQuery MCP | BigQuery MCP tools, Read |
+| `Explore` (built-in) | Claude Code built-in | Extract domain knowledge from codebases | Glob, Grep, Read |
 
 ### Agent Output Format
 
@@ -478,8 +480,8 @@ The markdown files are directly usable in multiple contexts without transformati
 - [x] Area file template and inline conventions
 
 ### Phase 2: Full Gathering
-- [x] Code Explorer Agent
-- [x] Data Explorer Agent
+- [x] `atlas-data-explorer-agent` (custom agent definition)
+- [x] Code exploration via built-in `Explore` agent
 - [x] `/atlas-interview` skill
 - [x] `/atlas-questions` skill
 
